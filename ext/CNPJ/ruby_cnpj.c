@@ -2,13 +2,13 @@
 #include "cnpj.h"
 
 #ifdef RUBY_INTEGER_UNIFICATION
-#define BR_CNPJ_FIXNUM = rb_cFixnum;
-#define BR_CNPJ_BIGNUM = rb_cBignum;
+#define BR_CNPJ_FIXNUM rb_cInteger
+#define BR_CNPJ_BIGNUM rb_cInteger
 #endif
 
 #ifndef RUBY_INTEGER_UNIFICATION
-#define BR_CNPJ_FIXNUM = rb_cInteger;
-#define BR_CNPJ_BIGNUM = rb_cInteger;
+#define BR_CNPJ_FIXNUM rb_cFixnum
+#define BR_CNPJ_BIGNUM rb_cBignum
 #endif
 
 static VALUE t_init_cnpj(int argc, VALUE *argv, VALUE self)
