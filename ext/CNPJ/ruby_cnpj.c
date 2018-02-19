@@ -1,6 +1,16 @@
 #include "ruby.h"
 #include "cnpj.h"
 
+#ifdef RUBY_INTEGER_UNIFICATION
+#define BR_CNPJ_FIXNUM = rb_cFixnum;
+#define BR_CNPJ_BIGNUM = rb_cBignum;
+#endif
+
+#ifndef RUBY_INTEGER_UNIFICATION
+#define BR_CNPJ_FIXNUM = rb_cInteger;
+#define BR_CNPJ_BIGNUM = rb_cInteger;
+#endif
+
 static VALUE t_init_cnpj(int argc, VALUE *argv, VALUE self)
 {
     int radix = 0;
@@ -22,11 +32,11 @@ static VALUE t_init_cnpj(int argc, VALUE *argv, VALUE self)
         lldiv_t v;
         long long cnpj = 0;
 
-        if (rb_class_of(argv[0]) == rb_cString) 
+        if (rb_class_of(argv[0]) == rb_cString)
             cnpj = NUM2LL(rb_str_to_inum(argv[0], 10, 0));
         else
-            if (rb_class_of(argv[0]) == rb_cFixnum ||
-                rb_class_of(argv[0]) == rb_cBignum)
+            if (rb_class_of(argv[0]) == BR_CNPJ_FIXNUM ||
+                rb_class_of(argv[0]) == BR_CNPJ_BIGNUM)
                 cnpj = NUM2LL(argv[0]);
 
         v = lldiv(cnpj, (long long)100);
