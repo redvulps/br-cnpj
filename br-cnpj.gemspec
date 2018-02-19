@@ -36,8 +36,8 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<jeweler>, ["~> 1.4"])
       s.add_development_dependency(%q<rake-compiler>, ["~> 0.7"])
-      s.add_development_dependency(%q<rspec>, ["~> 1.3"])
-      s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
+
+      s.add_development_dependency(%q<rspec>, ["~> 1.3", ">= 1.2.9"])
     else
       s.add_dependency(%q<jeweler>, ["~> 1.4"])
       s.add_dependency(%q<rake-compiler>, ["~> 0.7"])
